@@ -12,7 +12,7 @@ import time
 import copy
 import numpy as np
 
-WINDOWHEIGHT=900
+WINDOWHEIGHT=600
 WINDOWWIDTH=900
 
 
@@ -38,6 +38,82 @@ class Okno():
     def draw_all_el(self):
         for i in range(len(self.elements_surf)):
             self.screen.blit(self.elements_surf[i],(self.elements_re[i].left,self.elements_re[i].top))
+    def exit_window(self):
+        loop=True
+        l=0
+        while loop:
+            for event in pygame.event.get():
+                # User presses QUIT-button.
+                if event.type == QUIT:
+                    loop = False 
+                    
+                elif event.type == KEYDOWN:
+                    # User presses ESCAPE-Key
+                    if event.key == K_ESCAPE:
+                        loop = False
+                    elif event.key == K_r:
+                        pass
+            self.screen.fill((100,100,100))
+            font = pygame.font.Font(None, 36)
+            text = font.render('Uzyskałeś wynik: {}'.format(Bullet.SCORE),1,(0,0,0))
+            #text = font.render('Uzyskałeś wynik: '+str(Bullet.SCORE),1,(0,0,0))
+            textpos = text.get_rect()
+            textpos.centerx = window.screen.get_rect().centerx
+            textpos.centery=window.screen.get_rect().centery
+            self.screen.blit(text, textpos)
+            if l%2==0:
+                textr = font.render("To play once again press r",1,(255,255,0))
+                textposr = textr.get_rect()
+                textposr.centerx = window.screen.get_rect().centerx
+                textposr.centery=window.screen.get_rect().centery+200
+                self.screen.blit(textr,textposr)
+                
+            l+=1
+            if l>12:
+                pygame.quit()
+            pygame.display.flip()
+            time.sleep(0.5)
+        
+            
+    def pause_window(self):
+        loop=True
+        l=0
+        self.screen.fill((100,100,100))
+        font = pygame.font.Font(None, 36)
+        text = font.render('To continue press SPACE',1,(0,0,0))
+        #text = font.render('Uzyskałeś wynik: '+str(Bullet.SCORE),1,(0,0,0))
+        textpos = text.get_rect()
+        textpos.centerx = window.screen.get_rect().centerx
+        textpos.centery=window.screen.get_rect().centery
+        self.screen.blit(text, textpos)
+        pygame.display.flip()
+        while loop:
+            for event in pygame.event.get():
+                # User presses QUIT-button.
+                if event.type == QUIT:
+                    self.exit_window()
+                    
+                elif event.type == KEYDOWN:
+                    # User presses ESCAPE-Key
+                    if event.key == K_ESCAPE:
+                        self.exit_window()
+                    elif event.key == K_SPACE:
+                        loop = False
+
+        
+    def check_event(self):
+        still_play=True
+        for event in pygame.event.get():
+            # User presses QUIT-button.
+            if event.type == QUIT:
+                still_play = False 
+                
+            elif event.type == KEYDOWN:
+                # User presses ESCAPE-Key
+                if event.key == K_ESCAPE:
+                    still_play = False
+        return still_play
+        
             
 def rotate_image(image,rect,direction,old_direction = 0):
           
@@ -79,10 +155,11 @@ def rotate_image(image,rect,direction,old_direction = 0):
             
 class Tank_own(pygame.sprite.Sprite):
     Tank_own_list=[]
+    Score=0
     
     def __init__(self,screen,x=0,y=0,dir=0,speed_bullet=30,direction=0,speed_tank=15,power=1):
        pygame.sprite.Sprite.__init__(self)    
-       self.image = pygame.image.load('czolg3.png')
+       self.image = pygame.image.load('czoligs1.png')
        self.screen=screen
        self.speed_bullet=speed_bullet
        self.speed_tank=speed_tank
@@ -97,19 +174,21 @@ class Tank_own(pygame.sprite.Sprite):
         Bullet(self.rect.copy(),self.direction,self.screen,self.speed_bullet,True)
         
     def move(self,key,op):
+        """
+        Wykonuje ruch czołgu w zależności od wciśniętego klawisza 
+        """
         old_center=self.rect.center
         
         if key == K_UP:
-            if self.direction == 0:
+            if self.direction == 0 and self.rect.top >= self.speed_tank:
                 self.rect = self.rect.move(0,-self.speed_tank)
             else:
-                # trzeba zaimplementowac odbijanie sie czolgu od scian
                 self.image,self.rect,self.direction = rotate_image(self.image,self.rect,0,self.direction)
                 self.rect=self.image.get_rect()
                 self.rect.center=old_center
            
         elif key == K_RIGHT:
-            if self.direction == 1:
+            if self.direction == 1 and (WINDOWWIDTH-self.rect.right) >= self.speed_tank:
                 self.rect=self.rect.move(self.speed_tank,0)
             else:
                 self.image,self.rect,self.direction = rotate_image(self.image,self.rect,1,self.direction)
@@ -117,13 +196,13 @@ class Tank_own(pygame.sprite.Sprite):
                 self.rect.center=old_center
 
         elif key == K_DOWN:
-            if self.direction == 2:
+            if self.direction == 2 and (WINDOWHEIGHT-self.rect.bottom) >= self.speed_tank:
                 self.rect=self.rect.move(0,self.speed_tank)
             else:
                 self.image,self.rect,self.direction = rotate_image(self.image,self.rect,2,self.direction)
                 self.rect=self.image.get_rect()
                 self.rect.center=old_center
-        elif key == K_LEFT:
+        elif key == K_LEFT and self.rect.left >= self.speed_tank:
             if self.direction == 3:
                 self.rect=self.rect.move(-self.speed_tank,0)
             else:
@@ -149,7 +228,7 @@ class Tank_enemy(pygame.sprite.Sprite):
     
     def __init__(self,screen,x=0,y=0,dir=0,speed_bullet=30,direction=0,speed_tank=5,power=1):
        pygame.sprite.Sprite.__init__(self)    
-       self.image = pygame.image.load('czolg_wroga.png')
+       self.image = pygame.image.load('czoligs2.png')
        self.screen=screen
        self.speed_bullet=speed_bullet
        self.speed_tank=speed_tank
@@ -175,13 +254,13 @@ class Tank_enemy(pygame.sprite.Sprite):
             elif ch == 3:
                 self.rect = self.rect.move(-self.speed_tank,0)
         else:
-            if self.direction == 0:
+            if self.direction == 0 and self.rect.top >= self.speed_tank:
                 self.rect = self.rect.move(0,-self.speed_tank)
-            elif self.direction == 1:
+            elif self.direction == 1 and (WINDOWWIDTH - self.rect.right) >= self.speed_tank:
                 self.rect = self.rect.move(self.speed_tank,0)
-            elif self.direction == 2:
+            elif self.direction == 2 and (WINDOWHEIGHT-self.rect.bottom) >= self.speed_tank:
                 self.rect = self.rect.move(0,self.speed_tank)
-            elif self.direction == 3:
+            elif self.direction == 3 and self.rect.left >= self.speed_tank:
                 self.rect = self.rect.move(-self.speed_tank,0)
             
     def shoot(self):
@@ -313,6 +392,8 @@ while mainloop:
                 k.move(event.key,1)
             elif event.key == K_SPACE:
                 k.shoot()
+            elif event.key == K_p:
+                window.pause_window()
 
     keys = pygame.key.get_pressed()  #checking pressed keys
     if keys[K_UP]:
@@ -338,19 +419,8 @@ while mainloop:
     time.sleep(0.08)
     if len(Tank_own.Tank_own_list)==0:
         mainloop=False
-print('what')
-window.screen.fill((100,100,100))
-print('yolo')
-font = pygame.font.Font(None, 36)
-text = font.render('Uzyskałeś wynik: {}'.format(Bullet.SCORE),1,(0,0,0))
-#text = font.render('Uzyskałeś wynik: '+str(Bullet.SCORE),1,(0,0,0))
-textpos = text.get_rect()
-textpos.centerx = window.screen.get_rect().centerx
-textpos.centery=window.screen.get_rect().centery
-window.screen.blit(text, textpos)  
-pygame.display.flip()
-time.sleep(3)
 
+window.exit_window()
 pygame.quit()
 
 
