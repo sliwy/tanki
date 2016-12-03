@@ -333,6 +333,7 @@ class Okno():
         Tank_enemy.clear()
         Bullet.clear()
         mapka=Map(self)
+        mapka.clear()
         mapka.create_ring()
         levels[self.level_number](mapka)
 
@@ -379,9 +380,7 @@ class Okno():
                     Tank_own.Tank_own_list[0].move(K_RIGHT,mapka)        
                 elif keys[K_LEFT]:
                     Tank_own.Tank_own_list[0].move(K_LEFT,mapka)
-                licz=0
-                while (len(Tank_enemy.Tank_enemy_list))<5 and licz<40:
-                    licz+=1
+                while (len(Tank_enemy.Tank_enemy_list))<5:
                     rand_pos=random_position(mapka,Tank_enemy.Tank_enemy_rect_list,Tank_own.Tank_own_rect_list)
                     enemy=Tank_enemy(window.screen,mapka,rand_pos[0],rand_pos[1])
 
@@ -392,8 +391,13 @@ class Okno():
                 mapka.draw_all()  
                 pygame.display.flip()
                 time.sleep(0.05)
-                if licz==10:
+                if sum([Tank_own.Score_1,Tank_own.Score_2])>20:
                     self.level_number+=1
+                    if self.level == 4:
+                        self.screen.fill((100,100,100))
+                        self.napisz_text("Dzięki za grę. Sprawdzaj aktualizacje :)")
+                        time.sleep(5)
+                        pygame.quit()
                     self.next_level()
                 if len(Tank_own.Tank_own_list)==0:
                     mainloop=False
@@ -401,12 +405,13 @@ class Okno():
             self.exit_window()
             
         elif Okno.PLAYER_NUMBER ==2:
-            licz=0
+
             levels=[Map.level1,Map.level2,Map.level3,Map.level4]
             Tank_own.clear()
             Tank_enemy.clear()
             Bullet.clear()
             mapka=Map(self)
+            mapka.clear()
             mapka.create_ring()
             levels[self.level_number](mapka)
             mainloop=True
@@ -478,7 +483,7 @@ class Okno():
                 mapka.draw_all()
                 pygame.display.flip()
                 time.sleep(0.05)
-                if licz==10:
+                if sum([Tank_own.Score_1,Tank_own.Score_2])>25:
                     self.level_number+=1
                     self.next_level()
                 if len(Tank_own.Tank_own_list)==0:
@@ -597,6 +602,8 @@ class Tank_own(pygame.sprite.Sprite):
                 Tank_enemy.zastygnij()
 
             elif self.mapa.bonus_list[i].typ == 0:
+                self.sound_granat=pygame.mixer.Sound('wybuch.wav')
+                self.sound_granat.play()
                 Tank_enemy.kill_all(self.player_number)
 
             self.mapa.del_bonus(self.mapa.bonus_list[i])
