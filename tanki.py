@@ -795,8 +795,6 @@ class Bullet(pygame.sprite.Sprite):
             for z in range(len(mapa.all_elements)-1,-1,-1):
                 
                 if mapa.all_elements[z].rect.collidepoint(x,y) and mapa.all_elements[z].colision :
-                    print(mapa.all_elements[z])
-                    print(mapa.all_elements[z].rect)
                     mapa.destroy_el(mapa.all_elements[z])
                     p.add(l)
             for z in range(len(Bullet.bullet_list)):
