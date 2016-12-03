@@ -391,7 +391,7 @@ class Okno():
                 mapka.draw_all()  
                 pygame.display.flip()
                 time.sleep(0.05)
-                if sum([Tank_own.Score_1,Tank_own.Score_2])>10:
+                if sum([Tank_own.Score_1,Tank_own.Score_2])>12:
                     self.level_number+=1
                     if self.level_number == 4:
                         self.screen.fill((100,100,100))
@@ -482,7 +482,7 @@ class Okno():
                 mapka.draw_all()
                 pygame.display.flip()
                 time.sleep(0.05)
-                if sum([Tank_own.Score_1,Tank_own.Score_2])>15:
+                if sum([Tank_own.Score_1,Tank_own.Score_2])>16:
                     self.level_number+=1
                     if self.level_number == 4:
                         self.screen.fill((100,100,100))
