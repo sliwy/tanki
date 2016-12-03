@@ -393,7 +393,7 @@ class Okno():
                 time.sleep(0.05)
                 if sum([Tank_own.Score_1,Tank_own.Score_2])>20:
                     self.level_number+=1
-                    if self.level == 4:
+                    if self.level_number == 4:
                         self.screen.fill((100,100,100))
                         self.napisz_text("Dzięki za grę. Sprawdzaj aktualizacje :)")
                         time.sleep(5)
@@ -485,6 +485,11 @@ class Okno():
                 time.sleep(0.05)
                 if sum([Tank_own.Score_1,Tank_own.Score_2])>25:
                     self.level_number+=1
+                    if self.level == 4:
+                        self.screen.fill((100,100,100))
+                        self.napisz_text("Dzięki za grę. Sprawdzaj aktualizacje :)")
+                        time.sleep(5)
+                        pygame.quit()
                     self.next_level()
                 if len(Tank_own.Tank_own_list)==0:
                     mainloop=False
@@ -600,6 +605,8 @@ class Tank_own(pygame.sprite.Sprite):
 
             elif self.mapa.bonus_list[i].typ == 1:
                 Tank_enemy.zastygnij()
+                sound_timer=pygame.mixer.Sound('zegar.wav')
+                sound_timer.play()
 
             elif self.mapa.bonus_list[i].typ == 0:
                 self.sound_granat=pygame.mixer.Sound('wybuch.wav')
@@ -671,6 +678,7 @@ class Tank_enemy(pygame.sprite.Sprite):
        self.mapa=mapa
        self.wybuch=pygame.image.load('wybuch.png')
        self.zs=101
+       self.sound_kill=pygame.mixer.Sound('wybuch2.wav')
        self.image,self.rect,self.direction = rotate_image(self.image,self.rect,self.direction)
        Tank_enemy.Tank_enemy_list.append(self)
        Tank_enemy.Tank_enemy_rect_list.append(self.rect)
@@ -725,6 +733,7 @@ class Tank_enemy(pygame.sprite.Sprite):
             Tank_own.Score_2 +=1
         k=np.array([True,False])
         self.screen.blit(self.wybuch,self.rect)
+        self.sound_kill.play()
         if np.random.choice(k,p=np.array([0.4,0.6])):
             bon=np.array([Stoper,Gwiazdka,Nurkowanie,Granat,Pancerz,Serduszko])
             bonus=np.random.choice(bon)

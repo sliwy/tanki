@@ -42,7 +42,6 @@ class Mur(MapElement):
             
 class TwardyMur(MapElement):
      def __init__(self,x,y,direction=0,colision=True):
-        print("twardy_mur")
         MapElement.__init__(self,x=x,y=y,file='twardymurek32.png',direction=0,colision=True)
 #     def destroy(self):
 #        pass
@@ -174,8 +173,6 @@ class Map():
                 del self.list_elements_colision[self.list_elements_colision.index(el)]
             self.l=[]
             self.l_rect=[]
-            print (self.l)
-            print(self.all_elements)
             self.zas=103
         else:
             if len(self.all_elements)!=0:
