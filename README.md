@@ -8,8 +8,8 @@ Jeden gracz:
 ruch czołgu: strzałki; oddanie strzału: spacja;
 
 Dwóch graczy:<br>
-pierwszy - ruch czołgu: strzałki; oddanie strzału (domyślnie): spacja;
-drugi -  ruch czołgu: klawisze W, S, A, D; oddanie strzału (domyślnie): lewy shift;
+pierwszy - ruch czołgu: strzałki; oddanie strzału (domyślnie): spacja;<br>
+drugi -  ruch czołgu: klawisze W, S, A, D; oddanie strzału (domyślnie): lewy shift;<br>
 Możliwość zmiany klawisza oddania strzału. 
 
 Bonusy:
