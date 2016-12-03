@@ -43,7 +43,7 @@ class Okno():
         self.window_height=window_height
         self.screen=pygame.display.set_mode((self.window_width,self.window_height),0,32)
         self.rect=self.screen.get_rect()
-        self.level_number=3
+        self.level_number=0
         pygame.display.set_caption('Tankujemy')
 
     def exit_window(self):
