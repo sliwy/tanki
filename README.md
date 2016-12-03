@@ -7,7 +7,7 @@ Zagraj sam lub z przyjacielem/przyjaciółką!
 Jeden gracz:
 ruch czołgu: strzałki; oddanie strzału: spacja;
 
-Dwóch graczy:
+Dwóch graczy:<br>
 pierwszy - ruch czołgu: strzałki; oddanie strzału (domyślnie): spacja;
 drugi -  ruch czołgu: klawisze W, S, A, D; oddanie strzału (domyślnie): lewy shift;
 Możliwość zmiany klawisza oddania strzału. 
