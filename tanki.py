@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env/python
 # -*- coding: utf-8 -*-
 """
 Created on Sun Nov 13 18:22:54 2016
@@ -401,6 +401,7 @@ class Okno():
             self.exit_window()
             
         elif Okno.PLAYER_NUMBER ==2:
+            licz=0
             levels=[Map.level1,Map.level2,Map.level3,Map.level4]
             Tank_own.clear()
             Tank_enemy.clear()
@@ -488,7 +489,7 @@ class Okno():
         self.napisz_text("Congratulations!!! You reached next level")
         pygame.display.flip()
         time.sleep(2)
-        Okno.GAME(Okno.PLAYER_NUMBER)
+        self.GAME(Okno.PLAYER_NUMBER)
         
             
 class Tank_own(pygame.sprite.Sprite):
@@ -511,11 +512,9 @@ class Tank_own(pygame.sprite.Sprite):
        self.speed_bullet=speed_bullet
        self.speed_tank=speed_tank
        self.rect = self.image.get_rect()
-       places=np.array([WINDOWWIDTH/2+64,WINDOWWIDTH/2-64])
-       x=np.random.choice(places)       
-       while self.rect.move(x,self.screen.get_rect().bottom-64).collidelist(self.mapa.list_elements_colision)!=-1 or  self.rect.move(x,self.screen.get_rect().bottom-64).collidelist(self.Tank_own_rect_list)!=-1 or self.rect.move(x,self.screen.get_rect().bottom-64).collidelist(Tank_enemy.Tank_enemy_rect_list)!=-1:
-           x=np.random.choice(places)
-       self.rect = self.rect.move(x,self.screen.get_rect().bottom-64)
+       rand_pos=random_position1(self.mapa,Tank_enemy.Tank_enemy_rect_list,Tank_own.Tank_own_rect_list)
+       
+       self.rect = self.rect.move(rand_pos[0],rand_pos[1])
        self.direction = direction
        self.player_number = player_number
        self.life=3
@@ -663,6 +662,7 @@ class Tank_enemy(pygame.sprite.Sprite):
        self.rect = self.rect.move(x,y)
        self.direction = direction
        self.mapa=mapa
+       self.wybuch=pygame.image.load('wybuch.png')
        self.zs=101
        self.image,self.rect,self.direction = rotate_image(self.image,self.rect,self.direction)
        Tank_enemy.Tank_enemy_list.append(self)
@@ -717,6 +717,7 @@ class Tank_enemy(pygame.sprite.Sprite):
         else:
             Tank_own.Score_2 +=1
         k=np.array([True,False])
+        self.screen.blit(self.wybuch,self.rect)
         if np.random.choice(k,p=np.array([0.4,0.6])):
             bon=np.array([Stoper,Gwiazdka,Nurkowanie,Granat,Pancerz,Serduszko])
             bonus=np.random.choice(bon)
@@ -815,7 +816,11 @@ def random_position(mapa,list1,list2):
     while pygame.Rect(x,y,64,64).collidelist(mapa.list_elements_colision)!=-1 or  pygame.Rect(x,y,64,64).collidelist(list1)!=-1 or pygame.Rect(x,y,64,64).collidelist(list2)!=-1:
         x,y=np.random.randint(0, WINDOWWIDTH - 99),np.random.randint(0, 150)
     return (x,y)
-
+def random_position1(mapa,list1,list2):
+    x,y=np.random.randint(0, WINDOWWIDTH - 99),np.random.randint(WINDOWHEIGHT-170, WINDOWHEIGHT-70)
+    while pygame.Rect(x,y,64,64).collidelist(mapa.list_elements_colision)!=-1 or  pygame.Rect(x,y,64,64).collidelist(list1)!=-1 or pygame.Rect(x,y,64,64).collidelist(list2)!=-1:
+        x,y=np.random.randint(0, WINDOWWIDTH - 99),np.random.randint(WINDOWHEIGHT-170, WINDOWHEIGHT-70)
+    return (x,y)
 
 def rotate_image(image,rect,direction,old_direction = 0):
           

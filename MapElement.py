@@ -66,6 +66,8 @@ class Granat(MapElement):
     def __init__(self,mapa,x,y,colision=True):
         MapElement.__init__(self,x=x,y=y,file='granat.png',direction=0,colision=False) 
         mapa.add_bonus(self)
+        self.sound_granat=pygame.mixer.Sound('wybuch.wav')
+        self.sound_granat.play()
         self.typ=0
            
 class Stoper(MapElement):
