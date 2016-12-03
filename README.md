@@ -3,8 +3,9 @@
 ## Przed Tobą 4 poziomy fascynującej gry. Zniszcz wrogie czołgi i uratuj śpiącego Linuxa przed zagładą. 
 
 
-Zagraj sam lub z przyjacielem/przyjaciółką! 
-Jeden gracz:
+Zagraj sam lub z przyjacielem/przyjaciółką! <br>
+
+Jeden gracz:<br>
 ruch czołgu: strzałki; oddanie strzału: spacja;
 
 Dwóch graczy:<br>
