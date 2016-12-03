@@ -395,7 +395,9 @@ class Okno():
                     self.level_number+=1
                     if self.level_number == 4:
                         self.screen.fill((100,100,100))
-                        self.napisz_text("Dzięki za grę. Sprawdzaj aktualizacje :)")
+                        self.napisz_text("Congratulations!!!",posy=-130)
+                        self.napisz_text("Thanks to you Linux is still alive",posy=-65)
+                        self.napisz_text("Check more updates to have more fun :)")
                         pygame.display.flip()
                         time.sleep(5)
                         pygame.quit()
@@ -488,7 +490,10 @@ class Okno():
                     self.level_number+=1
                     if self.level_number == 4:
                         self.screen.fill((100,100,100))
-                        self.napisz_text("Dzięki za grę. Sprawdzaj aktualizacje :)")
+                        self.napisz_text("Congratulations!!!",posy=-130)
+                        self.napisz_text("Thanks to you Linux is still alive",posy=-65)
+                        self.napisz_text("Check more updates to have more fun :)")
+                        pygame.display.flip()
                         time.sleep(5)
                         pygame.quit()
                     self.next_level()
