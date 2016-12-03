@@ -43,7 +43,7 @@ class Okno():
         self.window_height=window_height
         self.screen=pygame.display.set_mode((self.window_width,self.window_height),0,32)
         self.rect=self.screen.get_rect()
-        self.level_number=0
+        self.level_number=3
         pygame.display.set_caption('Tankujemy')
 
     def exit_window(self):
@@ -396,9 +396,9 @@ class Okno():
                     if self.level_number == 4:
                         self.screen.fill((100,100,100))
                         self.napisz_text("Dzięki za grę. Sprawdzaj aktualizacje :)")
+                        pygame.display.flip()
                         time.sleep(5)
                         pygame.quit()
-                    self.next_level()
                 if len(Tank_own.Tank_own_list)==0:
                     mainloop=False
 
