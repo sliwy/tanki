@@ -391,7 +391,7 @@ class Okno():
                 mapka.draw_all()  
                 pygame.display.flip()
                 time.sleep(0.05)
-                if sum([Tank_own.Score_1,Tank_own.Score_2])>20:
+                if sum([Tank_own.Score_1,Tank_own.Score_2])>14:
                     self.level_number+=1
                     if self.level_number == 4:
                         self.screen.fill((100,100,100))
@@ -471,8 +471,7 @@ class Okno():
                     player_one.move(K_d,mapka)        
                 elif keys[K_a] and player_one in Tank_own.Tank_own_list:
                     player_one.move(K_a,mapka)
-                while (len(Tank_enemy.Tank_enemy_list))<5and licz<40:
-                    licz+=1
+                while (len(Tank_enemy.Tank_enemy_list))<5:
                     rand_pos=random_position(mapka,Tank_enemy.Tank_enemy_rect_list,Tank_own.Tank_own_rect_list)
                     enemy=Tank_enemy(window.screen,mapka,rand_pos[0],rand_pos[1])
                     
@@ -483,9 +482,9 @@ class Okno():
                 mapka.draw_all()
                 pygame.display.flip()
                 time.sleep(0.05)
-                if sum([Tank_own.Score_1,Tank_own.Score_2])>25:
+                if sum([Tank_own.Score_1,Tank_own.Score_2])>19:
                     self.level_number+=1
-                    if self.level == 4:
+                    if self.level_number == 4:
                         self.screen.fill((100,100,100))
                         self.napisz_text("Dzięki za grę. Sprawdzaj aktualizacje :)")
                         time.sleep(5)
