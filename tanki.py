@@ -399,6 +399,8 @@ class Okno():
                         pygame.display.flip()
                         time.sleep(5)
                         pygame.quit()
+                    else: 
+                        self.next_level()
                 if len(Tank_own.Tank_own_list)==0:
                     mainloop=False
 
