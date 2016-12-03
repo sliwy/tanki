@@ -391,7 +391,7 @@ class Okno():
                 mapka.draw_all()  
                 pygame.display.flip()
                 time.sleep(0.05)
-                if sum([Tank_own.Score_1,Tank_own.Score_2])>14:
+                if sum([Tank_own.Score_1,Tank_own.Score_2])>10:
                     self.level_number+=1
                     if self.level_number == 4:
                         self.screen.fill((100,100,100))
@@ -482,7 +482,7 @@ class Okno():
                 mapka.draw_all()
                 pygame.display.flip()
                 time.sleep(0.05)
-                if sum([Tank_own.Score_1,Tank_own.Score_2])>19:
+                if sum([Tank_own.Score_1,Tank_own.Score_2])>15:
                     self.level_number+=1
                     if self.level_number == 4:
                         self.screen.fill((100,100,100))
@@ -604,8 +604,8 @@ class Tank_own(pygame.sprite.Sprite):
 
             elif self.mapa.bonus_list[i].typ == 1:
                 Tank_enemy.zastygnij()
-                sound_timer=pygame.mixer.Sound('zegar.wav')
-                sound_timer.play()
+#                sound_timer=pygame.mixer.Sound('zegar.wav')
+#                sound_timer.play()
 
             elif self.mapa.bonus_list[i].typ == 0:
                 self.sound_granat=pygame.mixer.Sound('wybuch.wav')
