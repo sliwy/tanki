@@ -13,6 +13,7 @@ import copy
 import pickle
 import numpy as np
 from MapElement import *
+import os
 
 WINDOWHEIGHT=640
 WINDOWWIDTH=832
@@ -35,7 +36,7 @@ class Okno():
         self.klawisz_strzal_1_wsad=WSAD[self.klawisz_wsad]
         self.klawisz_strzal_2_arrows=ARROWS[self.klawisz_arrows]
         
-        
+        pygame.mixer.pre_init(44100, -16, 1, 512)
         pygame.init()
         self.elements_surf=[]
         self.elements_re=[]
@@ -302,8 +303,8 @@ class Okno():
         self.screen.blit(text, textpos)
         
     def otocz_czolgami(self,rect):
-        image_l = pygame.image.load('tan32a.png')
-        image_r = pygame.image.load("tan32.png")
+        image_l = pygame.image.load(os.path.join('graphics','tan32a.png'))
+        image_r = pygame.image.load(os.path.join('graphics',"tan32.png"))
         rect_r=image_r.get_rect()
         rect_l=image_l.get_rect()
         rect_r.center=rect.center
@@ -502,7 +503,7 @@ class Okno():
             self.exit_window()
     def next_level(self):
         self.screen.fill((100,100,100))
-        self.napisz_text("Congratulations!!! You reached next level")
+        self.napisz_text("Congratulations!!! You've reached next level")
         pygame.display.flip()
         time.sleep(2)
         self.GAME(Okno.PLAYER_NUMBER)
@@ -518,11 +519,11 @@ class Tank_own(pygame.sprite.Sprite):
     def __init__(self,screen,mapa,player_number,speed_bullet=15,direction=0,speed_tank=8,power=1):
        pygame.sprite.Sprite.__init__(self)
        if player_number == 1:
-           self.image = pygame.image.load('czoligs1.png')
-           self.image_strong=pygame.image.load('czoligs1och.png')
+           self.image = pygame.image.load(os.path.join('graphics','czoligs1.png'))
+           self.image_strong=pygame.image.load(os.path.join('graphics','czoligs1och.png'))
        else: 
-           self.image = pygame.image.load('czoligs2.png')
-           self.image_strong = pygame.image.load('czoligs2och.png')
+           self.image = pygame.image.load(os.path.join('graphics','czoligs2.png'))
+           self.image_strong = pygame.image.load(os.path.join('czoligs2och.png'))
        self.screen=screen
        self.mapa = mapa
        self.speed_bullet=speed_bullet
@@ -536,8 +537,8 @@ class Tank_own(pygame.sprite.Sprite):
        self.life=3
        self.image,self.rect,self.direction = rotate_image(self.image,self.rect,self.direction)
        self.water=False
-       self.sound_kill=pygame.mixer.Sound('failure.wav')
-       self.sound_shoot=pygame.mixer.Sound('strzal.wav')
+       self.sound_kill=pygame.mixer.Sound(os.path.join('sounds','failure.wav'))
+       self.sound_shoot=pygame.mixer.Sound(os.path.join('sounds','strzal.wav'))
 
        Tank_own.Tank_own_list.append(self)
        Tank_own.Tank_own_rect_list.append(self.rect)
@@ -588,7 +589,7 @@ class Tank_own(pygame.sprite.Sprite):
         Tank_own.Tank_own_rect_list[ind]=self.rect       
                 
     def update(self):
-        sound_bonus= pygame.mixer.Sound('bonus.wav')
+        sound_bonus= pygame.mixer.Sound(os.path.join('sounds','bonus.wav'))
         i = self.rect.collidelist(self.mapa.bonus_list_rect)
         if i != -1 :
             sound_bonus.play()
@@ -615,7 +616,7 @@ class Tank_own(pygame.sprite.Sprite):
 #                sound_timer.play()
 
             elif self.mapa.bonus_list[i].typ == 0:
-                self.sound_granat=pygame.mixer.Sound('wybuch.wav')
+                self.sound_granat=pygame.mixer.Sound(os.path.join('sounds','wybuch.wav'))
                 self.sound_granat.play()
                 Tank_enemy.kill_all(self.player_number)
 
@@ -623,9 +624,9 @@ class Tank_own(pygame.sprite.Sprite):
         
         if self.player_number == 1:
 
-            self.screen.blit(pygame.image.load('zycia'+str(self.life)+'.png'),(0,0))
+            self.screen.blit(pygame.image.load(os.path.join('graphics','zycia'+str(self.life)+'.png')),(0,0))
         elif self.player_number == 2:
-            self.screen.blit(pygame.image.load('zycia'+str(self.life)+'.png'),(WINDOWWIDTH-130,0))
+            self.screen.blit(pygame.image.load(os.path.join('graphics','zycia'+str(self.life)+'.png')),(WINDOWWIDTH-130,0))
         if Tank_own.strong:
             self.screen.blit(rotate_tank(self.image_strong,self.direction),self.rect)
         else:
@@ -674,7 +675,7 @@ class Tank_enemy(pygame.sprite.Sprite):
     
     def __init__(self,screen,mapa,x=0,y=0,speed_bullet=15,direction=0,speed_tank=4,power=1):
        pygame.sprite.Sprite.__init__(self)    
-       self.image = pygame.image.load('czoligs3.png')
+       self.image = pygame.image.load(os.path.join('graphics','czoligs3.png'))
        self.screen=screen
        self.speed_bullet=speed_bullet
        self.speed_tank=speed_tank
@@ -682,9 +683,9 @@ class Tank_enemy(pygame.sprite.Sprite):
        self.rect = self.rect.move(x,y)
        self.direction = direction
        self.mapa=mapa
-       self.wybuch=pygame.image.load('wybuch.png')
+       self.wybuch=pygame.image.load(os.path.join('graphics','wybuch.png'))
        self.zs=101
-       self.sound_kill=pygame.mixer.Sound('wybuch2.wav')
+       self.sound_kill=pygame.mixer.Sound(os.path.join('sounds','wybuch2.wav'))
        self.image,self.rect,self.direction = rotate_image(self.image,self.rect,self.direction)
        Tank_enemy.Tank_enemy_list.append(self)
        Tank_enemy.Tank_enemy_rect_list.append(self.rect)

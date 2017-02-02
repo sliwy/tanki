@@ -9,6 +9,7 @@ import pygame
 import numpy as np
 WINDOWHEIGHT=640
 WINDOWWIDTH=832
+import os
 
 class MapElement():
     def __init__(self,x,y,file,direction = 0,colision=True):
@@ -26,8 +27,8 @@ class MapElement():
 
 class Mur(MapElement):
     
-    def __init__(self,x,y,direction=0,destroyed_file='superdziurka322.png',colision=True,life=2):
-        MapElement.__init__(self,x=x,y=y,file='supermurek322.png',direction=0,colision=True)
+    def __init__(self,x,y,direction=0,destroyed_file=os.path.join('graphics','superdziurka322.png'),colision=True,life=2):
+        MapElement.__init__(self,x=x,y=y,file=os.path.join('graphics','supermurek322.png'),direction=0,colision=True)
         self.destroyed_image=pygame.image.load(destroyed_file)
         self.life = life
     
@@ -42,28 +43,28 @@ class Mur(MapElement):
             
 class TwardyMur(MapElement):
      def __init__(self,x,y,direction=0,colision=True):
-        MapElement.__init__(self,x=x,y=y,file='twardymurek32.png',direction=0,colision=True)
+        MapElement.__init__(self,x=x,y=y,file=os.path.join('graphics','twardymurek32.png'),direction=0,colision=True)
 #     def destroy(self):
 #        pass
 
 class Woda(MapElement):
     def __init__(self,x,y,mapa,direction=0,colision=True):
-        MapElement.__init__(self,x=x,y=y,file='woda.png',direction=0,colision=False)
+        MapElement.__init__(self,x=x,y=y,file=os.path.join('graphics','woda.png'),direction=0,colision=False)
         mapa.add_water(self)
         
 class Las(MapElement):
     def __init__(self,x,y,direction=0,colision=False):
-        MapElement.__init__(self,x=x,y=y,file='superlas2.png',direction=0,colision=False)    
+        MapElement.__init__(self,x=x,y=y,file=os.path.join('graphics','superlas2.png'),direction=0,colision=False)    
             
 class Pingwinek(MapElement):
     def __init__(self,x,y,direction=0,colision=True):
-        MapElement.__init__(self,x=x,y=y,file='linux.png',direction=0,colision=True)        
+        MapElement.__init__(self,x=x,y=y,file=os.path.join('graphics','linux.png'),direction=0,colision=True)        
         
 ####################### BONUSY #######################        
         
 class Granat(MapElement):
     def __init__(self,mapa,x,y,colision=True):
-        MapElement.__init__(self,x=x,y=y,file='granat.png',direction=0,colision=False) 
+        MapElement.__init__(self,x=x,y=y,file=os.path.join('graphics','granat.png'),direction=0,colision=False) 
         mapa.add_bonus(self)
 
         self.typ=0
@@ -76,25 +77,25 @@ class Stoper(MapElement):
         
 class Pancerz(MapElement):
     def __init__(self,mapa,x,y,colision=True):
-        MapElement.__init__(self,x=x,y=y,file='pancerz.png',direction=0,colision=False)           
+        MapElement.__init__(self,x=x,y=y,file=os.path.join('graphics','pancerz.png'),direction=0,colision=False)           
         mapa.add_bonus(self)
         self.typ=2
         
 class Gwiazdka(MapElement):
     def __init__(self,mapa,x,y,colision=True):
-        MapElement.__init__(self,x=x,y=y,file='gwiazdka22.png',direction=0,colision=False)         
+        MapElement.__init__(self,x=x,y=y,file=os.path.join('graphics','gwiazdka22.png'),direction=0,colision=False)         
         mapa.add_bonus(self)
         self.typ=3
         
 class Nurkowanie(MapElement):
     def __init__(self,mapa,x,y,colision=True):
-        MapElement.__init__(self,x=x,y=y,file='nurkowanie.png',direction=0,colision=False)  
+        MapElement.__init__(self,x=x,y=y,file=os.path.join('graphics','nurkowanie.png'),direction=0,colision=False)  
         mapa.add_bonus(self)
         self.typ=4
         
 class Serduszko(MapElement):
     def __init__(self,mapa,x,y,colision=True):
-        MapElement.__init__(self,x=x,y=y,file='zycie222.png',direction=0,colision=False)  
+        MapElement.__init__(self,x=x,y=y,file=os.path.join('graphics','zycie222.png'),direction=0,colision=False)  
         mapa.add_bonus(self)        
         self.typ=5
         
