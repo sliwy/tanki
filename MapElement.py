@@ -99,7 +99,7 @@ class Granat(MapElement):
            
 class Stoper(MapElement):
     def __init__(self,mapa,x,y,colision=True):
-        MapElement.__init__(self,x=x,y=y,file='stoper.png',direction=0,colision=False)  
+        MapElement.__init__(self,x=x,y=y,file=os.path.join('graphics','stoper.png'),direction=0,colision=False)  
         mapa.add_bonus(self)
         self.typ=1
         
