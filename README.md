@@ -31,7 +31,7 @@ Do uruchomienia gry wymagany jest:
 2. Pygame 1.9.2b8
 3. Pakiety NumPy, Pickle oraz Time
 
-Aby uruchomić grę w terminalu systemu Linux należy w katalogu tanki wpisać w terminal: python tanki.py.
+Aby uruchomić grę w terminalu systemu Linux należy w katalogu tanki wpisać w terminal: `python tanki.py`.
 
 Życzę miłej zabawy.
 
