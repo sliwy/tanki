@@ -1,38 +1,37 @@
-# Powróć na chwilę do lat młodości.
+# Get back to Atari times.
 
-## Przed Tobą 4 poziomy fascynującej gry. Zniszcz wrogie czołgi i uratuj śpiącego Linuxa przed zagładą. 
+## Enjoy 4 levels of an amazing game. Destroy opposite tanks and save sleeping (or maybe frozen) Linux.
 
+Play single or multi player version. <br>
 
-Zagraj sam lub z przyjacielem/przyjaciółką! <br>
+One player:<br>
+Tank moves: arrows; shoot: space;
 
-Jeden gracz:<br>
-ruch czołgu: strzałki; oddanie strzału: spacja;
+To navigate around the menu you use arrows and Enter key.
 
-Do poruszania się po menu służą strzałki oraz klawisz Enter.
+Two players:<br>
+first - tank moves: arrows; shoot (default): space;<br>
+second -  tank moves: keys W, S, A, D; shoot (default): left shift;<br>
+There is a possibility to change shoot key.
 
-Dwóch graczy:<br>
-pierwszy - ruch czołgu: strzałki; oddanie strzału (domyślnie): spacja;<br>
-drugi -  ruch czołgu: klawisze W, S, A, D; oddanie strzału (domyślnie): lewy shift;<br>
-Możliwość zmiany klawisza oddania strzału. 
+Bonus:
+1. Star - makes wall around Linux solid for 5 seconds
+2. Heart - additional life
+3. Granade - destroys all opposite tanks
+4. Tank - tank armor reinforcement
+5. Stoper - freezez opposite tanks for 5 seconds
+6. Mask - enables swimming mode for your tank
 
-Bonusy:
-1. Gwiazdka - 5 sek wzmocnienie muru wokół Linuxa
-2. Serce - dodatkowe życie
-3. Granat - zniszczeniee widocznych wrogich czołgów
-4. Czołg - wzmocnienie pancerzu czołgu (wzmocniona ochrona)
-5. Stoper - 5 sek hibernacja wrogów
-6. Maska - możliwość przepływania przez wodę
+To get to next level you have to save Linux against 15-20 opposite tanks and destroy them all.
+4 levels available for now. Further development not planned.
 
-Aby przejść do następnego poziomu należy obronić linuxa przed liczbą około 15-20 czołgów wroga.
-Dostępne 4 plansze gry. Przewidywany dalszy rozwój projektu.
-
-Do uruchomienia gry wymagany jest:
+Tu run the game:
 1. Python 3.5+
 2. Pygame 1.9.2b8
 3. Pakiety NumPy, Pickle oraz Time
 
-Aby uruchomić grę w terminalu systemu Linux należy w katalogu tanki wpisać w terminal: `python tanki.py`.
+Tu run the game in terminal run `python tanki.py`
 
-Życzę miłej zabawy.
+Have fun!
 
 
